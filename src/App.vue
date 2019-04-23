@@ -11,7 +11,6 @@
     </div>
     <button @click="move(1)">Forward</button>
     <button @click="move(-1)">Backward</button>
-    <button @click="move(2)">Forward 2</button>
   </div>
 </template>
 
