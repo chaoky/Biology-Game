@@ -1,5 +1,26 @@
 <template>
-  <div></div>
+  <div class="wrapper">
+    <div class="title">
+      <h6>
+        A glicolise a primeira via metabolica da glicose e apresenta dez rações
+        quimicas. <br />
+        Esse importante processo ocorre no interior da célula, mais
+        precisamente:
+      </h6>
+    </div>
+    <div class="body">
+      <div>
+        <p class="a" id="1" @click="move(-1)">a) Mitocondria</p>
+        <p class="b" id="1" @click="move(1)">b) Citosol</p>
+        <p class="c" id="1" @click="move(-1)">c) Núcleo</p>
+      </div>
+      <div class="resp">
+        <img
+          src="https://cdn.discordapp.com/attachments/158304994523611136/568879820323422208/Layer_2aaa.png"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -9,9 +30,9 @@ import { mapGetters, mapMutations } from "vuex-typesafe-class";
 import Store from "@/store";
 
 @Component({
-  computed: {
-    ...mapGetters(Store, {
-      pos: "pos"
+  methods: {
+    ...mapMutations(Store, {
+      move: "move"
     })
   }
 })
@@ -19,3 +40,51 @@ export default class extends Vue {
   @Prop(String) title!: string;
 }
 </script>
+
+<style lang="scss" scoped>
+@import "https://fonts.googleapis.com/css?family=Permanent+Marker";
+@import "https://fonts.googleapis.com/css?family=Fredoka+One";
+
+.wrapper {
+  position: absolute;
+  box-shadow: 3px 4px;
+  align-self: center;
+  justify-self: center;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  border: 5px solid #acdeaa;
+  border-radius: 5px;
+  max-width: 200px;
+}
+.title {
+  background-color: #8fbbaf;
+}
+.body {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  background-color: #d6f8b8;
+}
+
+p {
+  cursor: pointer;
+  font-size: 0.6em;
+  color: #6b7b8e;
+  padding: 0.1em 1.4em;
+  font-family: "Permanent Marker", cursive;
+}
+h6 {
+  font-family: "Fredoka One", cursive;
+  font-weight: normal;
+  padding: 1em;
+  color: #6b7b8e;
+}
+img {
+  height: auto;
+  width: 78%;
+}
+.resp {
+  align-self: center;
+}
+</style>

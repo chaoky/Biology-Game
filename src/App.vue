@@ -3,7 +3,7 @@
     <div id="header"><h1>Jogo de Biologia??</h1></div>
     <game />
     <div id="footer">
-      <p>Made with by 💕 lordie</p>
+      <p>Made with 💕 by lordie</p>
     </div>
   </div>
 </template>

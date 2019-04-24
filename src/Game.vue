@@ -9,9 +9,6 @@
         src="@/assets/bigyoshi.png"
       />
     </div>
-    <button @click="move(1)">Right</button>
-    <button @click="move(-1)">Wrong</button>
-
     <card />
   </div>
 </template>
@@ -30,11 +27,6 @@ import Store from "@/store";
   computed: {
     ...mapGetters(Store, {
       pos: "pos"
-    })
-  },
-  methods: {
-    ...mapMutations(Store, {
-      move: "move"
     })
   }
 })
