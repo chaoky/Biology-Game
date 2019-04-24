@@ -1,10 +1,129 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import { createModule, Mutation } from "vuex-typesafe-class";
 
-Vue.use(Vuex);
+interface Place {
+  event: string;
+  top: string;
+  left: string;
+}
 
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {}
-});
+class Board {
+  places: Array<Place> = [
+    {
+      event: "win",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "red",
+      top: "86%",
+      left: "20%"
+    },
+    {
+      event: "green",
+      top: "86%",
+      left: "36%"
+    },
+    {
+      event: "yellow",
+      top: "86%",
+      left: "53%"
+    },
+    {
+      event: "omega green",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "red",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "green",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "red",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "red",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "omega yellow",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "green",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "yellow",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "red",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "yellow",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "red",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "omega yellow",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "green",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "red",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "yellow",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "omega green",
+      top: "86%",
+      left: "4%"
+    },
+    {
+      event: "red",
+      top: "86%",
+      left: "4%"
+    }
+  ];
+  place: number = 0;
+
+  get pos() {
+    return this.places[this.place];
+  }
+
+  @Mutation
+  move(ammount: number) {
+    this.place += ammount;
+  }
+}
+
+export default createModule(Board);

@@ -1,201 +1,43 @@
 <template>
   <div id="app">
-    <div id="board">
-      <img id="map" src="@/assets/tabuleiro.png" />
-      <img
-        id="token"
-        class="vert-move"
-        ref="token"
-        src="@/assets/bigyoshi.png"
-      />
+    <div id="header"><h1>Jogo de Biologia??</h1></div>
+    <game />
+    <div id="footer">
+      <p>Made with by 💕 lordie</p>
     </div>
-    <button @click="move(1)">Forward</button>
-    <button @click="move(-1)">Backward</button>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Vue, Component } from "vue-property-decorator";
+import game from "./Game.vue";
 
-interface Map {
-  event: string;
-  top: string;
-  left: string;
-}
-
-@Component
-export default class extends Vue {
-  map: Array<Map> = [
-    {
-      event: "win",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "20%"
-    },
-    {
-      event: "green",
-      top: "86%",
-      left: "36%"
-    },
-    {
-      event: "yellow",
-      top: "86%",
-      left: "53%"
-    },
-    {
-      event: "omega green",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "green",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "omega yellow",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "green",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "yellow",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "yellow",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "omega yellow",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "green",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "yellow",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "omega green",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    }
-  ];
-  pos = 0;
-
-  move(ammount: number) {
-    let token = this.$refs.token as HTMLImageElement;
-    const pos = this.pos + ammount;
-
-    token.style.left = this.map[pos].left;
-    token.style.top = this.map[pos].top;
-
-    this.event(this.map[pos]);
-    this.pos = pos;
+@Component({
+  components: {
+    game
   }
-  event({ event }: Map) {
-    console.log({ event });
-  }
-}
+})
+export default class extends Vue {}
 </script>
 
 <style lang="scss">
-Backward body {
+body,
+html {
   margin: 0;
-  padding: 0;
+  text-align: center;
 }
 #app {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: lightblue;
+  height: 100vh;
+  display: grid;
+  grid-gap: 5%;
+  grid-template-rows: 0.3fr auto 0.1fr;
 }
-#board {
-  position: relative;
+#header {
+  background: orange;
 }
-#map {
-  width: 100%;
-  max-height: 99vh;
-}
-#token {
-  position: absolute;
-  width: 10%;
-  top: 86%;
-  left: 4%;
-}
-
-img.vert-move {
-  -webkit-animation: mover 0.1s infinite alternate;
-  animation: mover 0.1s infinite alternate;
-}
-img.vert-move {
-  -webkit-animation: mover 0.1s infinite alternate;
-  animation: mover 0.1s infinite alternate;
-}
-@-webkit-keyframes mover {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-30px);
-  }
-}
-@keyframes mover {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-30px);
-  }
+#footer {
+  background: pink;
+  font-size: 0.8em;
 }
 </style>

@@ -1,8 +1,13 @@
 import Vue from "vue";
+import Vuex from "vuex";
 import App from "./App.vue";
-import store from "./store";
+import boardStore from "./store";
+
+Vue.use(Vuex);
 
 Vue.config.productionTip = false;
+
+let store = new Vuex.Store(boardStore);
 
 new Vue({
   store,
