@@ -1,18 +1,11 @@
 <template>
   <div class="wrapper">
     <div class="title">
-      <h6>
-        A glicolise a primeira via metabolica da glicose e apresenta dez rações
-        quimicas. <br />
-        Esse importante processo ocorre no interior da célula, mais
-        precisamente:
-      </h6>
+      <h6>{{ card.question }}</h6>
     </div>
     <div class="body">
-      <div>
-        <p class="a" id="1" @click="move(-1)">a) Mitocondria</p>
-        <p class="b" id="1" @click="move(1)">b) Citosol</p>
-        <p class="c" id="1" @click="move(-1)">c) Núcleo</p>
+      <div v-for="option in card.options" :key="option">
+        <p id="1" @click="move(option)">{{ option }}</p>
       </div>
       <div class="resp">
         <img
@@ -25,19 +18,22 @@
 
 <script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
-import { mapGetters, mapMutations } from "vuex-typesafe-class";
+import game from "@/game";
+import { Mutation } from "vuex-module-decorators";
 
-import Store from "@/store";
-
-@Component({
-  methods: {
-    ...mapMutations(Store, {
-      move: "move"
-    })
-  }
-})
+@Component
 export default class extends Vue {
-  @Prop(String) title!: string;
+  get card() {
+    return game.card;
+  }
+
+  move(awnser: string | boolean) {
+    if (game.card.answer == awnser) {
+      game.move(game.card.prize);
+    } else {
+      game.move(-1);
+    }
+  }
 }
 </script>
 

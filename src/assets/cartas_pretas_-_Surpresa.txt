@@ -1,0 +1,19 @@
+-Ande três casas
+
+-Ande duas casas
+
+-Ande uma casa
+
+-Ande uma casa
+
+-Jogue o dado mais uma vez
+
+-Jogue o dado novamente, mas ande para trás
+
+-Fique duas rodadas sem jogar
+
+-Escolha um dos competidores para voltar duas casas
+
+-Escolha um dos seus concorrentes para andar duas casas
+
+-Nada mudou, continue nessa casa

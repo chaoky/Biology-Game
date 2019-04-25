@@ -1,0 +1,25 @@
+-O complexo da piruvato-desidrogenase não é inibido por ATP e NADH. falso
+o complexo de piruvato-desidrogenase é inibido por ATP e NADH
+
+-No ciclo do ácido cítrico o citrato é isomerizado em policitrato. falso
+o citrato é isomerizado em isocitrato.
+
+-A glicólise tem um saldo líquido de 4 ATP, mas se acoplada a outras vias pode chegar a 100. falso
+O saldo líquido é de 2 ATP, mas se acoplada a outras vias pode chegar a 32.
+
+-Na etapa preparatória que existe fora do ciclo do ácido cítrico acontece a conversão de piruvato a citrato. falso
+na etapa preparatória que existe fora do ciclo acontece a conversão de piruvato a acetil-CoA
+
+-Existem 5 pontos de controle no cíclo do ácido cítrico. falso
+são três pontos de controle no ciclo
+
+
+-Glicose é armazenada como amido e glicogênio. verdadeiro
+
+-Na via glicolítica a molécula de glicose (6C) é degradada por uma sequência de 10 reações e 2 moléculas de piruvato (3C). verdadeiro
+
+-No ciclo do ácido cítrico a conversão de piruvato a acetil-CoA se dá devido ao complexo da piruvato-desidrogenase. verdadeiro
+
+-O ciclo do ácido cítrico é altamente exergônico. verdadeiro
+
+-A glicólise anaeróbica é o processo responsável pela quebra da glicose, transformando-a em piruvato ou ácido pirúvico. verdadeiro

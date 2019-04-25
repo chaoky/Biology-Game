@@ -5,8 +5,8 @@
       <img
         id="token"
         class="vert-move"
-        :style="{ top: pos.top, left: pos.left }"
         src="@/assets/bigyoshi.png"
+        :style="{ top: pos.top, left: pos.left }"
       />
     </div>
     <card />
@@ -15,22 +15,20 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { mapGetters, mapMutations } from "vuex-typesafe-class";
 
 import card from "@/components/Card.vue";
-import Store from "@/store";
+import game from "@/game";
 
 @Component({
   components: {
     card
-  },
-  computed: {
-    ...mapGetters(Store, {
-      pos: "pos"
-    })
   }
 })
-export default class extends Vue {}
+export default class extends Vue {
+  get pos() {
+    return game.pos;
+  }
+}
 </script>
 
 <style lang="scss">
