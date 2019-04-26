@@ -17,7 +17,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 import card from "@/components/Card.vue";
-import game from "@/game";
+import game from "@/game.ts";
 
 @Component({
   components: {
@@ -38,7 +38,7 @@ Backward body {
 }
 .left {
   left: 42%;
-  top: 60%;
+  top: 30%;
 }
 #game {
   display: flex;

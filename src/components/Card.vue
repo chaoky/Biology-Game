@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
-import game from "@/game";
+import game from "@/game.ts";
 import { Mutation } from "vuex-module-decorators";
 
 @Component

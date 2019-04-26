@@ -24,111 +24,28 @@ interface Card {
 @Module({ dynamic: true, name: "game", namespaced: true, store })
 class Board extends VuexModule {
   places: Array<Place> = [
-    {
-      event: "win",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "20%"
-    },
-    {
-      event: "green",
-      top: "86%",
-      left: "36%"
-    },
-    {
-      event: "yellow",
-      top: "86%",
-      left: "53%"
-    },
-    {
-      event: "omega green",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "green",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "omega yellow",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "green",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "yellow",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "yellow",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "omega yellow",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "green",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "yellow",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "omega green",
-      top: "86%",
-      left: "4%"
-    },
-    {
-      event: "red",
-      top: "86%",
-      left: "4%"
-    }
+    { event: "start", top: "4%", left: "85%" },
+    { event: "red", top: "4%", left: "69%" },
+    { event: "omega green", top: "4%", left: "53%" },
+    { event: "yellow", top: "4%", left: "36%" },
+    { event: "red", top: "15%", left: "25%" },
+    { event: "green", top: "25%", left: "35%" },
+    { event: "omega yellow", top: "25%", left: "53%" },
+    { event: "red", top: "25%", left: "70%" },
+    { event: "yellow", top: "35%", left: "80%" },
+    { event: "red", top: "45%", left: "70%" },
+    { event: "yellow", top: "45%", left: "52%" },
+    { event: "green", top: "45%", left: "37%" },
+    { event: "omega yellow", top: "45%", left: "20%" },
+    { event: "red", top: "55%", left: "9%" },
+    { event: "red", top: "65%", left: "20%" },
+    { event: "green", top: "65%", left: "37%" },
+    { event: "red", top: "65%", left: "57%" },
+    { event: "omega green", top: "75%", left: "65%" },
+    { event: "yellow", top: "86%", left: "53%" },
+    { event: "green", top: "86%", left: "36%" },
+    { event: "red", top: "86%", left: "20%" },
+    { event: "win", top: "86%", left: "4%" }
   ];
   cards: Array<Card> = [
     {
@@ -501,9 +418,16 @@ class Board extends VuexModule {
     },
     {
       color: "win",
-      question: "Biologia = diversão foda",
-      options: ["Começar"],
-      answer: "Começar",
+      question: "you win",
+      options: ["yikes"],
+      answer: "yikes",
+      prize: 1
+    },
+    {
+      color: "start",
+      question: "Ready?",
+      options: ["GO"],
+      answer: "GO",
       prize: 1
     }
   ];
