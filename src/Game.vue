@@ -9,7 +9,7 @@
         :style="{ top: pos.top, left: pos.left }"
       />
     </div>
-    <card />
+    <card class="left" />
   </div>
 </template>
 
@@ -35,6 +35,10 @@ export default class extends Vue {
 Backward body {
   margin: 0;
   padding: 0;
+}
+.left {
+  left: 42%;
+  top: 60%;
 }
 #game {
   display: flex;
