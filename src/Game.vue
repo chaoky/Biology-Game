@@ -9,7 +9,8 @@
         :style="{ top: pos.top, left: pos.left }"
       />
     </div>
-    <card class="left" />
+    <card class="left" v-if="card" />
+    <div v-else @click="roll(5)" v-html="face.face"></div>
   </div>
 </template>
 
@@ -25,8 +26,28 @@ import game from "@/game";
   }
 })
 export default class extends Vue {
+  diceFaces = [
+    { num: 1, face: "&#9856;" },
+    { num: 2, face: "&#9857;" },
+    { num: 3, face: "&#9858;" },
+    { num: 4, face: "&#9859;" },
+    { num: 5, face: "&#9860;" },
+    { num: 6, face: "&#9861;" }
+  ];
+  face = { num: 1, face: "&#9856;" };
+  card = false;
+
   get pos() {
+    this.card = false;
     return game.pos;
+  }
+
+  roll(acc: number) {
+    this.face = this.diceFaces[Math.floor(Math.random() * 6)];
+
+    setTimeout(() => {
+      acc != 0 ? this.roll(acc - 1) : game.move(this.face.num);
+    }, 100);
   }
 }
 </script>
