@@ -4,14 +4,9 @@
       <h6>{{ card.question }}</h6>
     </div>
     <div class="body">
-      <div v-for="option in card.options" :key="option">
-        <p id="1" @click="move(option)">{{ option }}</p>
-      </div>
-      <div class="resp">
-        <img
-          src="https://cdn.discordapp.com/attachments/158304994523611136/568879820323422208/Layer_2aaa.png"
-        />
-      </div>
+      <p v-for="option in card.options" :key="option" @click="move(option)">
+        {{ option }}
+      </p>
     </div>
   </div>
 </template>
@@ -42,45 +37,41 @@ export default class extends Vue {
 @import "https://fonts.googleapis.com/css?family=Fredoka+One";
 
 .wrapper {
-  position: absolute;
-  box-shadow: 3px 4px;
-  align-self: center;
-  justify-self: center;
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 2px 5px;
   border: 5px solid #acdeaa;
   border-radius: 5px;
-  max-width: 200px;
+  width: 200px;
 }
 .title {
   background-color: #8fbbaf;
+  height: 150px;
+  display: grid;
+
+  h6 {
+    font-family: "Fredoka One", cursive;
+    font-weight: normal;
+    padding: 1.3em;
+    color: #6b7b8e;
+    align-self: center;
+  }
 }
 .body {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
   background-color: #d6f8b8;
-}
-
-p {
   cursor: pointer;
-  font-size: 0.6em;
-  color: #6b7b8e;
-  padding: 0.1em 1.4em;
-  font-family: "Permanent Marker", cursive;
-}
-h6 {
-  font-family: "Fredoka One", cursive;
-  font-weight: normal;
-  padding: 1em;
-  color: #6b7b8e;
-}
-img {
-  height: auto;
-  width: 78%;
-}
-.resp {
-  align-self: center;
+
+  p {
+    height: 100%;
+    margin: 0;
+    font-size: 0.6em;
+    color: #6b7b8e;
+    padding: 1.3em;
+    font-family: "Permanent Marker", cursive;
+    &:hover {
+      background: white;
+    }
+  }
 }
 </style>

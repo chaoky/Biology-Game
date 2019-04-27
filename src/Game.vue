@@ -37,6 +37,7 @@ Backward body {
   padding: 0;
 }
 .left {
+  position: absolute;
   left: 42%;
   top: 30%;
 }
