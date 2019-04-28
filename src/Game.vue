@@ -8,10 +8,11 @@
         src="@/assets/bigyoshi.png"
         :style="{ top: pos.top, left: pos.left }"
       />
-    </div>
-    <card class="card" v-show="showCard" @resp="showCard = false" />
-    <div class="card" v-show="!showCard">
-      <p class="dice" @click="roll(5)" v-html="face.face"></p>
+      <card class="card" v-show="showCard" @resp="showCard = false" />
+      <div class="dice-bg" v-show="!showCard">
+        <h6>Dado-kun UwU</h6>
+        <p @click="roll(5)" class="dice" v-html="face.face"></p>
+      </div>
     </div>
   </div>
 </template>
@@ -75,11 +76,20 @@ Backward body {
 }
 .card {
   position: absolute;
-  left: 42%;
-  top: 30%;
+  left: 1%;
+  top: 15%;
 }
 .dice {
+  margin: 0;
+  padding: 0;
   font-size: 5em;
+}
+.dice-bg {
+  position: absolute;
+  left: 10%;
+  bottom: 0;
+  background: plum;
+  width: 80%;
 }
 #game {
   display: flex;
