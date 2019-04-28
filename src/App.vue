@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="header"><h1>Jogo de Biologia??</h1></div>
+    <div id="header"><h1>Glicokrebs</h1></div>
     <game />
     <div id="footer">
       <p>Made with 💕 by lordie</p>

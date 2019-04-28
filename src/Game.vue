@@ -78,6 +78,9 @@ Backward body {
   left: 42%;
   top: 30%;
 }
+.dice {
+  font-size: 5em;
+}
 #game {
   display: flex;
   align-items: center;
