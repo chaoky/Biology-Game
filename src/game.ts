@@ -454,7 +454,7 @@ class Board extends VuexModule {
   ];
 
   oldPlace: number = 0;
-  place: number = 0;
+  place: number = 20;
 
   card: Card = {
     color: "",
@@ -464,6 +464,7 @@ class Board extends VuexModule {
     prize: 0
   };
   awnser: boolean = true;
+  win: boolean = false;
 
   get pos() {
     return this.places[this.place];
@@ -472,21 +473,25 @@ class Board extends VuexModule {
   @Mutation
   draw() {
     let color = this.places[this.place].event;
-    let card = (this as any)[color].splice(
-      Math.random() * (this as any)[color].length,
-      1
-    )[0];
-
-    if (card != undefined) {
-      this.card = card;
+    if (color == "win") {
+      this.win = true;
     } else {
-      this.card = {
-        color: "",
-        question: "Acabaram as cartas desta cor",
-        options: ["O paulo = merda???"],
-        answer: "O paulo = merda???",
-        prize: 0
-      };
+      let card = (this as any)[color].splice(
+        Math.random() * (this as any)[color].length,
+        1
+      )[0];
+
+      if (card != undefined) {
+        this.card = card;
+      } else {
+        this.card = {
+          color: "",
+          question: "Acabaram as cartas desta cor",
+          options: ["O paulo = merda???"],
+          answer: "O paulo = merda???",
+          prize: 0
+        };
+      }
     }
   }
 
@@ -502,12 +507,17 @@ class Board extends VuexModule {
 
   @Mutation
   move(q: number) {
-    this.place += q;
+    this.place < 21 ? (this.place += q) : false;
   }
 
   @Mutation
   setAnswer(awnser: boolean) {
     this.awnser == awnser;
+  }
+
+  @Mutation
+  setWin(win: boolean) {
+    this.win = true;
   }
 }
 export default getModule(Board);

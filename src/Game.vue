@@ -9,9 +9,9 @@
         :style="{ top: pos.top, left: pos.left }"
       />
       <card class="card" v-show="showCard" @resp="showCard = false" />
-      <div class="dice-bg" v-show="!showCard">
-        <h6>Dado-kun UwU</h6>
-        <p @click="roll(5)" class="dice" v-html="face.face"></p>
+      <div class="dice-bg" v-show="!showCard" @click="roll(5)">
+        <h4>MOVE</h4>
+        <p class="dice" v-html="face.face"></p>
       </div>
     </div>
   </div>
@@ -62,7 +62,9 @@ export default class extends Vue {
         this.move(acc - 1);
       } else {
         game.draw();
-        this.showCard = true;
+        if (game.place < 21) {
+          this.showCard = true;
+        }
       }
     }, 500);
   }
@@ -82,15 +84,16 @@ Backward body {
 .dice {
   margin: 0;
   padding: 0;
-  cursor: pointer;
   font-size: 5em;
 }
 .dice-bg {
+  cursor: pointer;
+  border: solid wheat 3px;
   position: absolute;
-  left: 10%;
-  bottom: 0;
+  left: 30%;
+  bottom: 10%;
   background: plum;
-  width: 80%;
+  width: 40%;
 }
 #game {
   display: flex;
