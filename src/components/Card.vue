@@ -25,7 +25,7 @@ export default class extends Vue {
   @Emit()
   resp(awnser: string | boolean) {
     this.card.answer == awnser
-      ? game.setAnswer(true)
+      ? (game.setAnswer(true), game.move(game.card.prize))
       : (game.setAnswer(false), game.back());
   }
 }

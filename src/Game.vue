@@ -57,7 +57,7 @@ export default class extends Vue {
   move(acc: number) {
     setTimeout(() => {
       if (acc != 0) {
-        game.move();
+        game.move(1);
         this.move(acc - 1);
       } else {
         game.draw();

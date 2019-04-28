@@ -472,7 +472,10 @@ class Board extends VuexModule {
   @Mutation
   draw() {
     let color = this.places[this.place].event;
-    let card = this[color].splice(Math.random() * this[color].length, 1)[0];
+    let card = (this as any)[color].splice(
+      Math.random() * (this as any)[color].length,
+      1
+    )[0];
 
     if (card != undefined) {
       this.card = card;
@@ -498,8 +501,8 @@ class Board extends VuexModule {
   }
 
   @Mutation
-  move() {
-    this.place++;
+  move(q: number) {
+    this.place += q;
   }
 
   @Mutation
