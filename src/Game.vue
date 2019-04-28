@@ -80,7 +80,7 @@ export default class extends Vue {
 
   preMove(acc: number) {
     this.oldPos = acc;
-    this.showDice = false;
+    setTimeout(() => (this.showDice = false), 600);
     this.move(acc);
   }
 
