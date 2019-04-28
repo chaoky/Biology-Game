@@ -3,10 +3,12 @@
     <div id="header"><h1>Glicokrebs</h1></div>
     <div id="menu" v-show="!game">
       <h3>Bien Venido</h3>
-      <li>Play the die</li>
-      <li>Get the questions right to keep your movement</li>
-      <li>loose and go back</li>
-      <button @click="game = true">Starto!</button>
+      <li>Clique no dado</li>
+      <li>Acerte e fique</li>
+      <li>Erre e volte</li>
+      <p>>:3</p>
+
+      <div><button @click="game = true">Starto!</button></div>
     </div>
     <game v-show="game" />
     <div id="footer">
@@ -36,13 +38,16 @@ html {
   text-align: center;
 }
 #menu {
+  display: flex;
+  flex-direction: column;
   background: plum;
-  margin: 1em;
+  margin: 20%;
   padding: 2em;
 
   button {
+    margin: 1.5em;
     background: lightblue;
-    margin: 3em 30%;
+    padding: 1em 1em;
     border: solid salmon 3px;
     cursor: pointer;
   }
@@ -52,7 +57,6 @@ html {
   height: 100vh;
   display: grid;
   grid-gap: 5%;
-  grid-template-rows: 0.3fr auto 0.1fr;
 }
 #header {
   background: orange;

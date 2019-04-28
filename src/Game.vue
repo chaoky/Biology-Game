@@ -82,6 +82,7 @@ Backward body {
 .dice {
   margin: 0;
   padding: 0;
+  cursor: pointer;
   font-size: 5em;
 }
 .dice-bg {
