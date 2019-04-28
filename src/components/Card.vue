@@ -4,7 +4,7 @@
       <h6>{{ card.question }}</h6>
     </div>
     <div class="body">
-      <p v-for="option in card.options" :key="option" @click="move(option)">
+      <p v-for="option in card.options" :key="option" @click="resp(option)">
         {{ option }}
       </p>
     </div>
@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Prop, Component } from "vue-property-decorator";
+import { Vue, Prop, Component, Emit } from "vue-property-decorator";
 import game from "@/game.ts";
 import { Mutation } from "vuex-module-decorators";
 
@@ -22,12 +22,11 @@ export default class extends Vue {
     return game.card;
   }
 
-  move(awnser: string | boolean) {
-    if (game.card.answer == awnser) {
-      game.move(game.card.prize);
-    } else {
-      game.move(-1);
-    }
+  @Emit()
+  resp(awnser: string | boolean) {
+    this.card.answer == awnser
+      ? game.setAnswer(true)
+      : (game.setAnswer(false), game.back());
   }
 }
 </script>

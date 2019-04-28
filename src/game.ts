@@ -2,7 +2,8 @@ import {
   Mutation,
   Module,
   VuexModule,
-  getModule
+  getModule,
+  Action
 } from "vuex-module-decorators";
 
 import store from "./store";
@@ -26,28 +27,143 @@ class Board extends VuexModule {
   places: Array<Place> = [
     { event: "start", top: "4%", left: "85%" },
     { event: "red", top: "4%", left: "69%" },
-    { event: "omega green", top: "4%", left: "53%" },
+    { event: "omega", top: "4%", left: "53%" },
     { event: "yellow", top: "4%", left: "36%" },
     { event: "red", top: "15%", left: "25%" },
     { event: "green", top: "25%", left: "35%" },
-    { event: "omega yellow", top: "25%", left: "53%" },
+    { event: "omega", top: "25%", left: "53%" },
     { event: "red", top: "25%", left: "70%" },
     { event: "yellow", top: "35%", left: "80%" },
     { event: "red", top: "45%", left: "70%" },
     { event: "yellow", top: "45%", left: "52%" },
     { event: "green", top: "45%", left: "37%" },
-    { event: "omega yellow", top: "45%", left: "20%" },
+    { event: "omega", top: "45%", left: "20%" },
     { event: "red", top: "55%", left: "9%" },
     { event: "red", top: "65%", left: "20%" },
     { event: "green", top: "65%", left: "37%" },
     { event: "red", top: "65%", left: "57%" },
-    { event: "omega green", top: "75%", left: "65%" },
+    { event: "omega", top: "75%", left: "65%" },
     { event: "yellow", top: "86%", left: "53%" },
     { event: "green", top: "86%", left: "36%" },
     { event: "red", top: "86%", left: "20%" },
     { event: "win", top: "86%", left: "4%" }
   ];
-  cards: Array<Card> = [
+  green: Array<Card> = [
+    {
+      color: "green",
+      question: "Eu cataliso a fermentação láctica. Quem sou eu?",
+      options: ["Lactatonase", "Lactato-desidrogenase"],
+      answer: "Lactato-desidrogenase",
+      prize: 1
+    },
+    {
+      color: "green",
+      question:
+        "Sou uma das enzimas do ponto de controle da glicólise. Quem sou eu?",
+      options: ["Fosfofrutoquinase", "Hexolatoquinase"],
+      answer: "Fosfofrutoquinase",
+      prize: 1
+    },
+    {
+      color: "green",
+      question: "Eu sou a primeira via metabólica elucidada. Quem sou eu?",
+      options: ["Glicólise", "Ciclo da ureia"],
+      answer: "Glicólise",
+      prize: 1
+    },
+    {
+      color: "green",
+      question:
+        "No ciclo do ácido eu sou responsável pela formação de citrato e tenho feedback negativo. Quem sou eu?",
+      options: ["Etapa 5", "Etapa 1"],
+      answer: "Etapa 1",
+      prize: 1
+    },
+    {
+      color: "green",
+      question:
+        "Somos inibidores do complexo de -cetoglutarato no ciclo do ácido cítrico. Quem sou eu?",
+      options: ["ATP, NADH e succinilCoA", "ATP, NADH e O2"],
+      answer: "ATP, NADH e succinilCoA",
+      prize: 1
+    },
+    {
+      color: "green",
+      question:
+        "Eu sou composto por essas três enzimas piruvato-desidrogenase, diidrolipoil-transcetilase, diidropoil desidrogenase. Quem sou eu?",
+      options: [
+        "Complexo da oxalagenase",
+        "Complexo da piruvato-desidrogenase"
+      ],
+      answer: "Complexo da piruvato-desidrogenase",
+      prize: 1
+    },
+    {
+      color: "green",
+      question: "Na glicólise sou a fase de gasto de ATP. Quem sou eu?",
+      options: ["Fase de liberação", "Fase preparatória"],
+      answer: "Fase preparatória",
+      prize: 1
+    },
+    {
+      color: "green",
+      question:
+        "Na ausência do oxigênio na glicólise dessas oxidações não acontecem. Quem sou eu?",
+      options: ["NADH e piruvato", "FADH e C"],
+      answer: "NADH e piruvato",
+      prize: 1
+    },
+    {
+      color: "green",
+      question:
+        "Em eucariotos o ciclo ácido cítrico ocorre em mim. Quem sou eu?",
+      options: ["Mitocôndria", "Núcleo"],
+      answer: "Mitocôndria",
+      prize: 1
+    },
+    {
+      color: "green",
+      question:
+        "Somos os pontos de controles hormonais da glicose. Quem nós somos?",
+      options: [
+        "Glucagon, adrenalina e insulina",
+        "Tirosina, estrogênio e progesterona"
+      ],
+      answer: "Glucagon, adrenalina e insulina",
+      prize: 1
+    }
+  ];
+  omega: Array<Card> = [
+    {
+      color: "omega",
+      question: "LUCKY!",
+      options: ["Andar 1 casa"],
+      answer: "Andar 1 casa",
+      prize: 1
+    },
+    {
+      color: "omega",
+      question: "LUCKY!!",
+      options: ["Andar 2 casa"],
+      answer: "Andar 2 casa",
+      prize: 2
+    },
+    {
+      color: "omega",
+      question: "LUCKY!!!",
+      options: ["Andar 3 casa"],
+      answer: "Andar 3 casa",
+      prize: 3
+    },
+    {
+      color: "omega",
+      question: "LUCKY!!!!",
+      options: ["Andar 4 casa"],
+      answer: "Andar 4 casa",
+      prize: 4
+    }
+  ];
+  red: Array<Card> = [
     {
       color: "red",
       question:
@@ -255,7 +371,9 @@ class Board extends VuexModule {
       answer:
         "Ocorre nas três etapas principais: glicólise, ciclo de Krebs e cadeia transportadora de elétrons",
       prize: 1
-    },
+    }
+  ];
+  yellow: Array<Card> = [
     {
       color: "yellow",
       question:
@@ -332,127 +450,34 @@ class Board extends VuexModule {
       options: ["Verdadeiro", "Falso"],
       answer: "Verdadeiro",
       prize: 1
-    },
-    {
-      color: "green",
-      question: "Eu cataliso a fermentação láctica. Quem sou eu?",
-      options: ["Lactatonase", "Lactato-desidrogenase"],
-      answer: "Lactato-desidrogenase",
-      prize: 1
-    },
-    {
-      color: "green",
-      question:
-        "Sou uma das enzimas do ponto de controle da glicólise. Quem sou eu?",
-      options: ["Fosfofrutoquinase", "Hexolatoquinase"],
-      answer: "Fosfofrutoquinase",
-      prize: 1
-    },
-    {
-      color: "green",
-      question: "Eu sou a primeira via metabólica elucidada. Quem sou eu?",
-      options: ["Glicólise", "Ciclo da ureia"],
-      answer: "Glicólise",
-      prize: 1
-    },
-    {
-      color: "green",
-      question:
-        "No ciclo do ácido eu sou responsável pela formação de citrato e tenho feedback negativo. Quem sou eu?",
-      options: ["Etapa 5", "Etapa 1"],
-      answer: "Etapa 1",
-      prize: 1
-    },
-    {
-      color: "green",
-      question:
-        "Somos inibidores do complexo de -cetoglutarato no ciclo do ácido cítrico. Quem sou eu?",
-      options: ["ATP, NADH e succinilCoA", "ATP, NADH e O2"],
-      answer: "ATP, NADH e succinilCoA",
-      prize: 1
-    },
-    {
-      color: "green",
-      question:
-        "Eu sou composto por essas três enzimas piruvato-desidrogenase, diidrolipoil-transcetilase, diidropoil desidrogenase. Quem sou eu?",
-      options: [
-        "Complexo da oxalagenase",
-        "Complexo da piruvato-desidrogenase"
-      ],
-      answer: "Complexo da piruvato-desidrogenase",
-      prize: 1
-    },
-    {
-      color: "green",
-      question: "Na glicólise sou a fase de gasto de ATP. Quem sou eu?",
-      options: ["Fase de liberação", "Fase preparatória"],
-      answer: "Fase preparatória",
-      prize: 1
-    },
-    {
-      color: "green",
-      question:
-        "Na ausência do oxigênio na glicólise dessas oxidações não acontecem. Quem sou eu?",
-      options: ["NADH e piruvato", "FADH e C"],
-      answer: "NADH e piruvato",
-      prize: 1
-    },
-    {
-      color: "green",
-      question:
-        "Em eucariotos o ciclo ácido cítrico ocorre em mim. Quem sou eu?",
-      options: ["Mitocôndria", "Núcleo"],
-      answer: "Mitocôndria",
-      prize: 1
-    },
-    {
-      color: "green",
-      question:
-        "Somos os pontos de controles hormonais da glicose. Quem nós somos?",
-      options: [
-        "Glucagon, adrenalina e insulina",
-        "Tirosina, estrogênio e progesterona"
-      ],
-      answer: "Glucagon, adrenalina e insulina",
-      prize: 1
-    },
-    {
-      color: "win",
-      question: "you win",
-      options: ["yikes"],
-      answer: "yikes",
-      prize: 1
-    },
-    {
-      color: "start",
-      question: "Ready?",
-      options: ["GO"],
-      answer: "GO",
-      prize: 1
     }
   ];
 
+  oldPlace: number = 0;
   place: number = 0;
+
+  card: Card = {
+    color: "",
+    question: "",
+    options: [],
+    answer: "",
+    prize: 1
+  };
+  awnser: boolean = true;
 
   get pos() {
     return this.places[this.place];
   }
 
-  get card() {
-    let cards: Array<Card> = [];
-    this.cards.forEach((element, index) => {
-      if (element.color === this.pos.event) {
-        cards.push(element);
-        this.cards.splice(index, 1);
-      }
-    });
-    let card = cards.splice(Math.floor(Math.random() * cards.length), 1)[0];
-    this.cards.push(...cards);
+  @Mutation
+  draw() {
+    let color = this.places[this.place].event;
+    let card = this[color].splice(Math.random() * this[color].length, 1)[0];
 
     if (card != undefined) {
-      return card;
+      this.card = card;
     } else {
-      return {
+      this.card = {
         color: "",
         question: "Acabaram as cartas desta cor",
         options: ["O paulo = merda???"],
@@ -463,8 +488,23 @@ class Board extends VuexModule {
   }
 
   @Mutation
-  move(ammount: number) {
-    this.place + ammount >= 0 ? (this.place += ammount) : this.place;
+  old() {
+    this.oldPlace = this.place;
+  }
+
+  @Mutation
+  back() {
+    this.place = this.oldPlace;
+  }
+
+  @Mutation
+  move() {
+    this.place++;
+  }
+
+  @Mutation
+  setAnswer(awnser: boolean) {
+    this.awnser == awnser;
   }
 }
 export default getModule(Board);

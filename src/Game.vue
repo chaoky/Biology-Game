@@ -9,8 +9,10 @@
         :style="{ top: pos.top, left: pos.left }"
       />
     </div>
-    <card class="left" v-if="card" />
-    <div v-else @click="roll(5)" v-html="face.face"></div>
+    <card class="card" v-show="showCard" @resp="showCard = false" />
+    <div class="card" v-show="!showCard">
+      <p class="dice" @click="roll(5)" v-html="face.face"></p>
+    </div>
   </div>
 </template>
 
@@ -26,6 +28,8 @@ import game from "@/game.ts";
   }
 })
 export default class extends Vue {
+  showCard: boolean = false;
+
   diceFaces = [
     { num: 1, face: "&#9856;" },
     { num: 2, face: "&#9857;" },
@@ -35,19 +39,31 @@ export default class extends Vue {
     { num: 6, face: "&#9861;" }
   ];
   face = { num: 1, face: "&#9856;" };
-  card = false;
 
   get pos() {
-    this.card = false;
     return game.pos;
   }
 
   roll(acc: number) {
+    game.old();
+
     this.face = this.diceFaces[Math.floor(Math.random() * 6)];
 
     setTimeout(() => {
-      acc != 0 ? this.roll(acc - 1) : game.move(this.face.num);
+      acc != 0 ? this.roll(acc - 1) : this.move(this.face.num);
     }, 100);
+  }
+
+  move(acc: number) {
+    setTimeout(() => {
+      if (acc != 0) {
+        game.move();
+        this.move(acc - 1);
+      } else {
+        game.draw();
+        this.showCard = true;
+      }
+    }, 500);
   }
 }
 </script>
@@ -57,7 +73,7 @@ Backward body {
   margin: 0;
   padding: 0;
 }
-.left {
+.card {
   position: absolute;
   left: 42%;
   top: 30%;
