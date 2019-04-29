@@ -109,7 +109,7 @@ export default class extends Vue {
       if (this.diceFaces[rand] == this.face) rand++;
       dice.play();
       this.face = this.diceFaces[rand];
-      await sleep(300);
+      await sleep(400);
     }
     this.oldPos = this.face.num;
     this.showDice = false;

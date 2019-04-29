@@ -518,7 +518,7 @@ class Board extends VuexModule {
   @Action
   async move(move: Move) {
     for (let i = move.amount; i > 0; i--) {
-      await sleep(300);
+      await sleep(400);
       jump.play();
       this.go(move.direction);
       if (this.place == 21) {
@@ -526,7 +526,7 @@ class Board extends VuexModule {
         return 1;
       }
     }
-    await sleep(200);
+    await sleep(300);
     return 0;
   }
   @Mutation
