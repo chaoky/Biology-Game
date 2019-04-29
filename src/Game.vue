@@ -45,6 +45,7 @@ import game from "@/game.ts";
 
 const right = new Audio(require("@/assets/right.wav"));
 const wrong = new Audio(require("@/assets/wrong.wav"));
+const dice = new Audio(require("@/assets/dice.wav"));
 
 const sleep = (ms: number) => {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -101,7 +102,9 @@ export default class extends Vue {
     this.enableDice = false;
     for (let i = acc; i > 0; i--) {
       this.face = this.diceFaces[Math.round(Math.random() * 5)];
-      await sleep(200);
+      dice.play();
+
+      await sleep(300);
     }
     this.oldPos = this.face.num;
     this.showDice = false;

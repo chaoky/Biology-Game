@@ -15,7 +15,7 @@
         </li>
         <li>O jogo acaba quando se chega ao fim do tabuleiro.</li>
 
-        <div><button @click="game = true">Começar!</button></div>
+        <div><button @click="start()">Começar!</button></div>
       </div>
       <div v-show="win" class="win">
         <h3>!VICTORY</h3>
@@ -36,6 +36,7 @@ import { Vue, Component } from "vue-property-decorator";
 import gameState from "@/game.ts";
 
 const bg = new Audio(require("@/assets/bg.ogg"));
+const click = new Audio(require("@/assets/click.wav"));
 
 import game from "./Game.vue";
 
@@ -57,7 +58,13 @@ export default class extends Vue {
     return gameState.win;
   }
 
+  start() {
+    click.play();
+    this.game = true;
+  }
+
   reload() {
+    click.play();
     window.location.reload();
   }
 }
