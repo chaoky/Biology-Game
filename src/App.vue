@@ -49,6 +49,7 @@ export default class extends Vue {
 
   mounted() {
     bg.volume = 0.1;
+    bg.autoplay;
     bg.play();
   }
 
