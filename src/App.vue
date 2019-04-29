@@ -37,6 +37,10 @@ import gameState from "@/game.ts";
 
 const bg = new Audio(require("@/assets/bg.ogg"));
 const click = new Audio(require("@/assets/click.wav"));
+bg.volume = 0.05;
+bg.autoplay;
+bg.loop = true;
+click.volume = 0.5;
 
 import game from "./Game.vue";
 
@@ -49,8 +53,6 @@ export default class extends Vue {
   game = false;
 
   mounted() {
-    bg.volume = 0.1;
-    bg.autoplay;
     bg.play();
   }
 

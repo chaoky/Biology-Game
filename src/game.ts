@@ -12,6 +12,15 @@ const omega = new Audio(require("@/assets/omega.wav"));
 const draw = new Audio(require("@/assets/draw.wav"));
 const win = new Audio(require("@/assets/win.wav"));
 const loose = new Audio(require("@/assets/loose.wav"));
+const jump = new Audio(require("@/assets/jump.wav"));
+
+const volume = 0.3;
+
+omega.volume = volume;
+draw.volume = volume;
+win.volume = volume;
+loose.volume = volume;
+jump.volume = volume;
 
 interface Place {
   event: string;
@@ -509,7 +518,8 @@ class Board extends VuexModule {
   @Action
   async move(move: Move) {
     for (let i = move.amount; i > 0; i--) {
-      await sleep(200);
+      await sleep(300);
+      jump.play();
       this.go(move.direction);
       if (this.place == 21) {
         this.setWin(true);

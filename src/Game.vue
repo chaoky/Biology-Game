@@ -47,6 +47,10 @@ const right = new Audio(require("@/assets/right.wav"));
 const wrong = new Audio(require("@/assets/wrong.wav"));
 const dice = new Audio(require("@/assets/dice.wav"));
 
+right.volume = 0.4;
+wrong.volume = 0.4;
+dice.volume = 0.3;
+
 const sleep = (ms: number) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
@@ -101,9 +105,10 @@ export default class extends Vue {
   async roll(acc: number) {
     this.enableDice = false;
     for (let i = acc; i > 0; i--) {
-      this.face = this.diceFaces[Math.round(Math.random() * 5)];
+      let rand = Math.round(Math.random() * 5);
+      if (this.diceFaces[rand] == this.face) rand++;
       dice.play();
-
+      this.face = this.diceFaces[rand];
       await sleep(300);
     }
     this.oldPos = this.face.num;
@@ -168,22 +173,27 @@ Backward body {
   left: 1%;
   top: 15%;
 }
-.dice {
-  pointer-events: none;
-  margin: 0.1em;
-  font-size: 5em;
-  background: none;
-  border: none;
-  text-decoration: none;
-}
+
 .dice-bg {
   cursor: pointer;
+  padding: 0;
   border: solid wheat 3px;
   position: absolute;
   left: 30%;
   bottom: 10%;
   background: plum;
   width: 40%;
+  .dice {
+    margin: 0;
+    font-size: 7em;
+    background: none;
+    border: none;
+    text-decoration: none;
+  }
+  h4 {
+    padding-top: 1em;
+    margin: 0;
+  }
 }
 #game {
   display: flex;
