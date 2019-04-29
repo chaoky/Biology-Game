@@ -38,7 +38,7 @@ import gameState from "@/game.ts";
 const bg = new Audio(require("@/assets/bg.ogg"));
 const click = new Audio(require("@/assets/click.wav"));
 bg.volume = 0.05;
-bg.autoplay;
+bg.autoplay = true;
 bg.loop = true;
 click.volume = 0.5;
 
