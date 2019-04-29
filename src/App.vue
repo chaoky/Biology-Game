@@ -15,7 +15,7 @@
         </li>
         <li>O jogo acaba quando se chega ao fim do tabuleiro.</li>
 
-        <div><button @click="game = true">Starto!</button></div>
+        <div><button @click="game = true">Começar!</button></div>
       </div>
       <div v-show="win" class="win">
         <h3>!VICTORY</h3>
@@ -35,6 +35,8 @@
 import { Vue, Component } from "vue-property-decorator";
 import gameState from "@/game.ts";
 
+const bg = new Audio(require("@/assets/bg.ogg"));
+
 import game from "./Game.vue";
 
 @Component({
@@ -44,6 +46,11 @@ import game from "./Game.vue";
 })
 export default class extends Vue {
   game = false;
+
+  mounted() {
+    bg.volume = 0.1;
+    bg.play();
+  }
 
   get win() {
     return gameState.win;
@@ -56,8 +63,13 @@ export default class extends Vue {
 </script>
 
 <style lang="scss">
+@import "https://fonts.googleapis.com/css?family=Fredoka+One";
+
 body,
 html {
+  * {
+    font-family: "Fredoka One", cursive;
+  }
   margin: 0;
   text-align: center;
 }

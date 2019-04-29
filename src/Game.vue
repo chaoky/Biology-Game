@@ -43,12 +43,19 @@ import { Component, Vue } from "vue-property-decorator";
 import card from "@/components/Card.vue";
 import game from "@/game.ts";
 
+const right = new Audio(require("@/assets/right.wav"));
+const wrong = new Audio(require("@/assets/wrong.wav"));
+
+const sleep = (ms: number) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};
+
 @Component
 export default class extends Vue {
-  showCard: boolean = false;
   showDice: boolean = true;
   oldPos: number = 0;
   enableDice: boolean = true;
+  showCard: boolean = false;
 
   diceFaces = [
     { num: 1, face: "&#9856;" },
@@ -60,10 +67,6 @@ export default class extends Vue {
   ];
   face = { num: 1, face: "&#9856;" };
 
-  sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
   get pos() {
     return game.pos;
   }
@@ -72,68 +75,48 @@ export default class extends Vue {
     return game.card;
   }
 
-  resp(awnser: string | boolean) {
-    this.showCard = false;
-    this.card.answer == awnser
-      ? this.fuckMove(game.card.prize)
-      : this.moveBack(this.oldPos);
-  }
-
-  fuckMove(acc: number) {
-    if (acc != 0) {
-      this.oldPos = acc;
-      this.move(acc);
+  async resp(awnser: string | boolean) {
+    if (this.card.answer == awnser) {
+      right.play();
+      this.oldPos = this.card.prize;
+      this.showCard = false;
+      await game.move({ amount: this.card.prize, direction: 1 });
+      if (this.card.prize == 0) {
+        this.showDice = true;
+        this.showCard = false;
+      } else {
+        this.showDice = false;
+        this.showCard = true;
+        game.setCard();
+      }
     } else {
+      wrong.play();
+      this.showCard = false;
+      await game.move({ amount: this.oldPos, direction: -1 });
       this.showDice = true;
-      this.enableDice = true;
     }
   }
 
-  async preMove(acc: number) {
-    this.oldPos = acc;
-    await this.sleep(600);
-    this.move(acc);
-    this.showDice = false;
-  }
-
-  roll(acc: number) {
+  async roll(acc: number) {
     this.enableDice = false;
-    this.face = this.diceFaces[Math.floor(Math.random() * 6)];
-    setTimeout(() => {
-      acc != 0 ? this.roll(acc - 1) : this.preMove(this.face.num);
-    }, 200);
-  }
-
-  move(acc: number) {
-    setTimeout(() => {
-      if (acc != 0) {
-        game.move(1);
-        game.move(0);
-        this.move(acc - 1);
-      } else {
-        game.draw();
-        this.showCard = true;
-      }
-    }, 400);
-  }
-  moveBack(acc: number) {
+    for (let i = acc; i > 0; i--) {
+      this.face = this.diceFaces[Math.round(Math.random() * 5)];
+      await sleep(200);
+    }
+    this.oldPos = this.face.num;
     this.showDice = false;
-    setTimeout(() => {
-      if (acc != 0) {
-        game.move(-1);
-        this.moveBack(acc - 1);
-      } else {
-        this.enableDice = true;
-        this.showDice = true;
-      }
-    }, 400);
+    this.enableDice = true;
+
+    if ((await game.move({ amount: this.face.num, direction: 1 })) == 0) {
+      game.setCard();
+      this.showCard = true;
+    }
   }
 }
 </script>
 
 <style lang="scss">
 @import "https://fonts.googleapis.com/css?family=Permanent+Marker";
-@import "https://fonts.googleapis.com/css?family=Fredoka+One";
 
 #card {
   box-shadow: 2px 5px;

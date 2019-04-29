@@ -8,6 +8,11 @@ import {
 
 import store from "./store";
 
+const omega = new Audio(require("@/assets/omega.wav"));
+const draw = new Audio(require("@/assets/draw.wav"));
+const win = new Audio(require("@/assets/win.wav"));
+const loose = new Audio(require("@/assets/loose.wav"));
+
 interface Place {
   event: string;
   top: string;
@@ -21,6 +26,15 @@ interface Card {
   answer: string | boolean;
   prize: number;
 }
+
+interface Move {
+  amount: number;
+  direction: 1 | -1;
+}
+
+const sleep = (ms: number) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};
 
 @Module({ dynamic: true, name: "game", namespaced: true, store })
 class Board extends VuexModule {
@@ -453,7 +467,6 @@ class Board extends VuexModule {
     }
   ];
 
-  oldPlace: number = 0;
   place: number = 0;
 
   card: Card = {
@@ -463,7 +476,6 @@ class Board extends VuexModule {
     answer: "",
     prize: 0
   };
-  awnser: boolean = true;
   win: boolean = false;
 
   get pos() {
@@ -471,8 +483,10 @@ class Board extends VuexModule {
   }
 
   @Mutation
-  draw() {
+  setCard() {
     let color = this.places[this.place].event;
+    if (color == "omega") omega.play();
+    else draw.play();
 
     let card = (this as any)[color].splice(
       Math.random() * (this as any)[color].length,
@@ -492,24 +506,27 @@ class Board extends VuexModule {
     }
   }
 
-  @Mutation
-  old() {
-    this.oldPlace = this.place;
+  @Action
+  async move(move: Move) {
+    for (let i = move.amount; i > 0; i--) {
+      await sleep(200);
+      this.go(move.direction);
+      if (this.place == 21) {
+        this.setWin(true);
+        return 1;
+      }
+    }
+    await sleep(200);
+    return 0;
   }
-
   @Mutation
-  back() {
-    this.place = this.oldPlace;
+  go(acc: 1 | -1) {
+    this.place += acc;
   }
-
   @Mutation
-  move(q: number) {
-    this.place == 21 ? (this.win = true) : (this.place += q);
-  }
-
-  @Mutation
-  setAnswer(awnser: boolean) {
-    this.awnser == awnser;
+  setWin(bool: boolean) {
+    this.win = bool;
+    win.play();
   }
 }
 export default getModule(Board);
