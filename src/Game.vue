@@ -24,10 +24,15 @@
           </div>
         </div>
       </div>
-      <div class="dice-bg" v-show="showDice" @click="roll(5)">
+      <button
+        v-show="showDice"
+        class="dice-bg"
+        @click="roll(5)"
+        :disabled="!enableDice"
+      >
         <h4>MOVE</h4>
         <p class="dice" v-html="face.face"></p>
-      </div>
+      </button>
     </div>
   </div>
 </template>
@@ -43,6 +48,7 @@ export default class extends Vue {
   showCard: boolean = false;
   showDice: boolean = true;
   oldPos: number = 0;
+  enableDice: boolean = true;
 
   diceFaces = [
     { num: 1, face: "&#9856;" },
@@ -53,6 +59,10 @@ export default class extends Vue {
     { num: 6, face: "&#9861;" }
   ];
   face = { num: 1, face: "&#9856;" };
+
+  sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   get pos() {
     return game.pos;
@@ -75,16 +85,19 @@ export default class extends Vue {
       this.move(acc);
     } else {
       this.showDice = true;
+      this.enableDice = true;
     }
   }
 
-  preMove(acc: number) {
+  async preMove(acc: number) {
     this.oldPos = acc;
-    setTimeout(() => (this.showDice = false), 600);
+    await this.sleep(600);
     this.move(acc);
+    this.showDice = false;
   }
 
   roll(acc: number) {
+    this.enableDice = false;
     this.face = this.diceFaces[Math.floor(Math.random() * 6)];
     setTimeout(() => {
       acc != 0 ? this.roll(acc - 1) : this.preMove(this.face.num);
@@ -110,6 +123,7 @@ export default class extends Vue {
         game.move(-1);
         this.moveBack(acc - 1);
       } else {
+        this.enableDice = true;
         this.showDice = true;
       }
     }, 400);
@@ -169,9 +183,12 @@ Backward body {
   top: 15%;
 }
 .dice {
-  margin: 0;
-  padding: 0;
+  pointer-events: none;
+  margin: 0.1em;
   font-size: 5em;
+  background: none;
+  border: none;
+  text-decoration: none;
 }
 .dice-bg {
   cursor: pointer;
