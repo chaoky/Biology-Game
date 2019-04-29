@@ -15,7 +15,10 @@
         </li>
         <li>O jogo acaba quando se chega ao fim do tabuleiro.</li>
 
-        <div><button @click="start()">Começar!</button></div>
+        <div>
+          <button @click="start()">Começar!</button>
+          <button @click="sound()">audio</button>
+        </div>
       </div>
       <div v-show="win" class="win">
         <h3>!VICTORY</h3>
@@ -58,6 +61,10 @@ export default class extends Vue {
 
   get win() {
     return gameState.win;
+  }
+
+  sound() {
+    bg.paused ? bg.play() : bg.pause();
   }
 
   start() {
